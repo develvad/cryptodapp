@@ -1,0 +1,12 @@
+{
+  "name": "cryptodapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/develvad/cryptodapp.git",
+  "author": "develvad <develvad@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "yargs": "^17.6.2"
+  }
+}
