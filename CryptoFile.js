@@ -20,7 +20,12 @@ const secret = Uint8Array.from(origin.computeSecret(public, "hex", "hex"));
 const algoritm = 'aes-256-cbc';
 const cipher = createCipheriv(algoritm, secret.slice(0, 32), secret.slice(0, 16));
 // file to encrypt from --file
-const file = fs.readFileSync(path.join(__dirname) + '/' + args.file);
-let encrypt = cipher.update(file, 'utf-8', 'hex');
-encrypt = encrypt + cipher.final("hex");
-fs.writeFileSync(path.join(__dirname) + '/' + args.file + '.encrypt', encrypt);
+fs.createReadStream(path.join(__dirname) + '/' + args.file)
+    .pipe(cipher)
+    .pipe(new fs.createWriteStream(path.join(__dirname) + '/' + args.file + '.encrypt'))
+// without stream way
+//
+// const file = fs.readFileSync(path.join(__dirname) + '/' + args.file);
+// let encrypt = cipher.update(file, 'utf-8', 'hex');
+// encrypt = encrypt + cipher.final("hex");
+// fs.writeFileSync(path.join(__dirname) + '/' + args.file + '.encrypt', encrypt);
